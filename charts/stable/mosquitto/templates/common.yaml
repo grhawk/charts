@@ -13,5 +13,63 @@ volumeSpec:
 {{- end -}}
 {{- $_ := set .Values.persistence "mosquitto-config" (include "mosquitto.configVolume" . | fromYaml) -}}
 
+{{/* Append the password_secret as a volume */}}
+{{- define "mosquitto.passwordSecretVolume" -}}
+enabled: "true"
+mountPath: "/mosquitto/config/password-file.secret"
+subPath: "password-file.secret"
+type: "custom"
+volumeSpec:
+  secret:
+    defaultMode: 0555
+    secretName: {{ template "common.names.fullname" .  }}-password
+{{- end -}}
+{{- if .Values.persistence.passwordfile.enabled -}}
+{{- $_ := set .Values.persistence "passwordfile" (include "mosquitto.passwordSecretVolume" . | fromYaml) -}}
+{{- end -}}
+
+{{/* Append the certs files as volumes */}}
+{{- define "mosquitto.certsVolumes.serverCrt" -}}
+enabled: "true"
+mountPath: "/mosquitto/config/mqtt-server.crt"
+subPath: "mqtt-server.crt"
+type: "custom"
+volumeSpec:
+  secret:
+    defaultMode: 0555
+    secretName: {{ template "common.names.fullname" .  }}-mqtt-server-crt
+{{- end -}}
+{{- if .Values.persistence.ca.enabled  -}}
+{{- $_ := set .Values.persistence "server-crt" (include "mosquitto.certsVolumes.serverCrt" . | fromYaml) -}}
+{{- end -}}
+
+{{- define "mosquitto.certsVolumes.caCrt" -}}
+enabled: "true"
+mountPath: "/mosquitto/config/ca.crt"
+subPath: "ca.crt"
+type: "custom"
+volumeSpec:
+  secret:
+    defaultMode: 0555
+    secretName: {{ template "common.names.fullname" .  }}-ca-crt
+{{- end -}}
+{{- if .Values.persistence.ca.enabled  -}}
+{{- $_ := set .Values.persistence "ca" (include "mosquitto.certsVolumes.caCrt" . | fromYaml) -}}
+{{- end -}}
+
+{{- define "mosquitto.certsVolumes.serverKey" -}}
+enabled: "true"
+mountPath: "/mosquitto/config/mqtt-server.key"
+subPath: "mqtt-server.key"
+type: "custom"
+volumeSpec:
+  secret:
+    defaultMode: 0555
+    secretName: {{ template "common.names.fullname" .  }}-mqtt-server-key
+{{- end -}}
+{{- if .Values.persistence.ca.enabled  -}}
+{{- $_ := set .Values.persistence "server-key" (include "mosquitto.certsVolumes.serverKey" . | fromYaml) -}}
+{{- end -}}
+
 {{/* Render the templates */}}
 {{ include "common.all" . }}
