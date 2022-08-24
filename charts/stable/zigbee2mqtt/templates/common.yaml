@@ -13,5 +13,48 @@ volumeSpec:
 {{- end -}}
 {{- $_ := set .Values.persistence "zigbee2mqtt-settings" (include "zigbee2mqtt.settingsVolume" . | fromYaml) -}}
 
+
+{{- define "zigbee2mqtt.certsVolumes.clientKey" -}}
+enabled: "true"
+mountPath: "/certs/client.key"
+subPath: "client.key"
+type: "custom"
+volumeSpec:
+  secret:
+    defaultMode: 0555
+    secretName: {{ template "common.names.fullname" .  }}-client-key
+{{- end -}}
+{{- if .Values.tls.enabled  -}}
+{{- $_ := set .Values.persistence "clientkey" (include "zigbee2mqtt.certsVolumes.clientKey" . | fromYaml) -}}
+{{- end -}}
+
+{{- define "zigbee2mqtt.certsVolumes.clientCrt" -}}
+enabled: "true"
+mountPath: "/certs/client.crt"
+subPath: "client.crt"
+type: "custom"
+volumeSpec:
+  secret:
+    defaultMode: 0555
+    secretName: {{ template "common.names.fullname" .  }}-client-crt
+{{- end -}}
+{{- if .Values.tls.enabled  -}}
+{{- $_ := set .Values.persistence "clientcrt" (include "zigbee2mqtt.certsVolumes.clientCrt" . | fromYaml) -}}
+{{- end -}}
+
+{{- define "zigbee2mqtt.certsVolumes.caCrt" -}}
+enabled: "true"
+mountPath: "/certs/ca.crt"
+subPath: "ca.crt"
+type: "custom"
+volumeSpec:
+  secret:
+    defaultMode: 0555
+    secretName: {{ template "common.names.fullname" .  }}-ca-crt
+{{- end -}}
+{{- if .Values.tls.enabled  -}}
+{{- $_ := set .Values.persistence "cacrt" (include "zigbee2mqtt.certsVolumes.caCrt" . | fromYaml) -}}
+{{- end -}}
+
 {{/* Render the templates */}}
 {{ include "common.all" . }}
