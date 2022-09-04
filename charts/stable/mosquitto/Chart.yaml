@@ -22,6 +22,8 @@ dependencies:
     version: 4.5.2
 annotations:
   artifacthub.io/changes: |-
+    - kind: fix
+      description: Do not create secrets if not defined in values.
     - kind: added
       description: Added support for tls encryption and password file.
     - kind: changed
