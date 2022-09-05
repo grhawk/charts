@@ -49,3 +49,19 @@ persistence:
   configinc:
     enabled: false
     mountPath: /mosquitto/configinc
+
+  passwordfile:
+    enabled: false
+    mountPath: /mosquitto/config/password-file.secret
+
+  ca:
+    enabled: false
+    mountPath: /mosquitto/config/ca.crt
+
+  mqttServerKey:
+    enabled: false
+    mountPath: /mosquitto/config/mqtt-server.key
+
+  mqttServerCrt:
+    enabled: false
+    mountPath: /mosquitto/config/mqtt-server.crt
