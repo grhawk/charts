@@ -26,10 +26,14 @@ data:
     include_dir {{ .Values.persistence.configinc.mountPath }}
     {{- end }}
     {{- if .Values.persistence.passwordfile.enabled }}
-    password_file /mosquitto/config/password-file.secret
+    password_file {{ .Values.persistence.passwordfile.mountPath }}
     {{- end }}
     {{- if .Values.persistence.ca.enabled }}
-    cafile /mosquitto/config/ca.crt
-    keyfile /mosquitto/config/mqtt-server.key
-    certfile /mosquitto/config/mqtt-server.crt
+    cafile {{ .Values.persistence.ca.mountPath }}
+    {{- end }}
+    {{- if .Values.persistence.mqttServerKey.enabled }}
+    keyfile {{ .Values.persistence.mqttServerKey.mountPath }}
+    {{- end }}
+    {{- if .Values.persistence.mqttServerCrt.enabled }}
+    certfile {{ .Values.persistence.mqttServerCrt.mountPath }}
     {{- end }}
