@@ -1,6 +1,6 @@
 # zigbee2mqtt
 
-![Version: 9.5.0](https://img.shields.io/badge/Version-9.5.0-informational?style=flat-square) ![AppVersion: 1.19.1](https://img.shields.io/badge/AppVersion-1.19.1-informational?style=flat-square)
+![Version: 9.5.1](https://img.shields.io/badge/Version-9.5.1-informational?style=flat-square) ![AppVersion: 1.19.1](https://img.shields.io/badge/AppVersion-1.19.1-informational?style=flat-square)
 
 Bridges events and allows you to control your Zigbee devices via MQTT
 
@@ -124,21 +124,23 @@ securityContext:
 | image.tag | string | `"1.19.1"` | image tag |
 | ingress.main | object | See values.yaml | Enable and configure ingress settings for the chart under this key. |
 | persistence | object | See values.yaml | Configure persistence settings for the chart under this key. |
+| persistence.clientcrt | object | `{"enabled":false}` | The following three enable TLS traffic between zigbee2mqtt and the mqtt service. They should be all enabled or all disabled. The data for the mounts are provided using the |
 | persistence.usb | object | See values.yaml | Configure a hostPathMount to mount a USB device in the container. |
 | securityContext.privileged | bool | `nil` | Privileged securityContext may be required if USB controller is accessed directly through the host machine |
 | service | object | See values.yaml | Configures service settings for the chart. Normally this does not need to be modified. |
+| tls.enabled | bool | `false` |  |
 
 ## Changelog
 
-### Version 9.5.0
+### Version 9.5.1
 
 #### Added
 
-* Support mutual tls.
+N/A
 
 #### Changed
 
-* Upgraded `common` chart dependency to version 4.5.2
+* Improved tls setup.
 
 #### Fixed
 
