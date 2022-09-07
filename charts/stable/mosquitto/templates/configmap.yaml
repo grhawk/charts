@@ -30,10 +30,9 @@ data:
     {{- end }}
     {{- if .Values.persistence.ca.enabled }}
     cafile {{ .Values.persistence.ca.mountPath }}
+    require_certificate {{ .Values.auth.require_certificate }}
     {{- end }}
-    {{- if .Values.persistence.mqttServerKey.enabled }}
-    keyfile {{ .Values.persistence.mqttServerKey.mountPath }}
-    {{- end }}
-    {{- if .Values.persistence.mqttServerCrt.enabled }}
-    certfile {{ .Values.persistence.mqttServerCrt.mountPath }}
+    {{- if (or .Values.persistence.crt.enabled .Values.persistence.key.enabled) }}
+    keyfile {{ .Values.persistence.key.mountPath }}
+    certfile {{ .Values.persistence.crt.mountPath }}
     {{- end }}
