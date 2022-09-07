@@ -1,6 +1,6 @@
 # mosquitto
 
-![Version: 4.9.2](https://img.shields.io/badge/Version-4.9.2-informational?style=flat-square) ![AppVersion: 2.0.14](https://img.shields.io/badge/AppVersion-2.0.14-informational?style=flat-square)
+![Version: 4.9.4](https://img.shields.io/badge/Version-4.9.4-informational?style=flat-square) ![AppVersion: 2.0.14](https://img.shields.io/badge/AppVersion-2.0.14-informational?style=flat-square)
 
 Eclipse Mosquitto - An open source MQTT broker
 
@@ -77,25 +77,26 @@ N/A
 |-----|------|---------|-------------|
 | addListener | bool | `true` | When enabled, this adds the `listener` option to the mosquitto config. Change this to false when using TLS. |
 | auth.enabled | bool | `false` | By enabling this, `allow_anonymous` gets set to `false` in the mosquitto config. |
+| auth.require_certificate | bool | `false` | Allows only client presenting a valid certificate. |
 | image.pullPolicy | string | `"IfNotPresent"` | image pull policy |
 | image.repository | string | `"eclipse-mosquitto"` | image repository |
 | image.tag | string | chart.appVersion | image tag |
-| perListenerSettings | bool | `false` | By enabling this, authentication and access control settings will be controlled on a per-listener basis |
+| perListenerSettings | bool | `false` |  |
 | persistence.ca.enabled | bool | `false` |  |
 | persistence.ca.mountPath | string | `"/mosquitto/config/ca.crt"` |  |
 | persistence.configinc | object | See values.yaml | Configure a persistent volume to place *.conf mosquitto-config-files in. When enabled, this gets set as `include_dir` in the mosquitto config. |
+| persistence.crt.enabled | bool | `false` |  |
+| persistence.crt.mountPath | string | `"/mosquitto/config/mosquitto.crt"` |  |
 | persistence.data | object | See values.yaml | Configure a persistent volume to place mosquitto data in. When enabled, this enables `persistence` and `persistence_location` in the mosquitto config. |
-| persistence.mqttServerCrt.enabled | bool | `false` |  |
-| persistence.mqttServerCrt.mountPath | string | `"/mosquitto/config/mqtt-server.crt"` |  |
-| persistence.mqttServerKey.enabled | bool | `false` |  |
-| persistence.mqttServerKey.mountPath | string | `"/mosquitto/config/mqtt-server.key"` |  |
+| persistence.key.enabled | bool | `false` |  |
+| persistence.key.mountPath | string | `"/mosquitto/config/mosquitto.key"` |  |
 | persistence.passwordfile.enabled | bool | `false` |  |
-| persistence.passwordfile.mountPath | string | `"/mosquitto/config/password-file.secret"` |  |
+| persistence.passwordfile.mountPath | string | `"/mosquitto/config/mosquitto-passwords"` |  |
 | service | object | See values.yaml | Configures service settings for the chart. Normally this does not need to be modified. |
 
 ## Changelog
 
-### Version 4.9.2
+### Version 4.9.4
 
 #### Added
 
