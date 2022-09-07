@@ -3,7 +3,7 @@ apiVersion: v2
 appVersion: 2.0.14
 description: Eclipse Mosquitto - An open source MQTT broker
 name: mosquitto
-version: 4.9.3
+version: 4.9.4
 kubeVersion: ">=1.16.0-0"
 keywords:
   - mosquitto
@@ -22,5 +22,5 @@ dependencies:
     version: 4.5.2
 annotations:
   artifacthub.io/changes: |-
-    - kind: fix
-      description: Changed the way secrets are stored to facilitate working with vaults.
+    - kind: chore
+      description: improved secrets management for tls.
