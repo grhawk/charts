@@ -29,7 +29,25 @@ auth:
   # -- By enabling this, `allow_anonymous` gets set to `false` in the mosquitto config.
   enabled: false
 
-# -- By enabling this, authentication and access control settings will be controlled on a per-listener basis
+  # -- The following config allow to create secrets to provide the passwordfile or
+  # the certs needed for TLS encryption. Remember to enable the needed persistence
+  # to make this setting working.
+  # NB. The passwordfile and the caCrt can be provided as single entity while the
+  # other two must be provided together. Refer to mosquitto docs for more details.
+  #
+  # passwordfile: |
+  #   YWRtaW46JDckMTAxJGVXSy9zcHpJcjlnOFlTS2okN2grQ2pYbFg4Y3ArcmxlY1pm
+
+  # mqttServerKey: |
+  #    LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tCk1JSUV2UUlCQURBTkJna3Foa2lH
+
+  # mqttServerCrt: |
+  #    LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURSVENDQWkwQ0ZIa29jUCtv
+
+  # caCrt: |
+  #    LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURjekNDQWx1Z0F3SUJBZ0lV
+
+  # -- By enabling this, authentication and access control settings will be controlled on a per-listener basis
 perListenerSettings: false
 
 # -- When enabled, this adds the `listener` option to the mosquitto config.
@@ -50,18 +68,22 @@ persistence:
     enabled: false
     mountPath: /mosquitto/configinc
 
+# -- Provide the data from the auth configuration or create a secret named
+# mosquitto-secrets containing the appropriate keys (eg. mosquitto-passwords).
   passwordfile:
     enabled: false
-    mountPath: /mosquitto/config/password-file.secret
-
-  ca:
-    enabled: false
-    mountPath: /mosquitto/config/ca.crt
+    mountPath: /mosquitto/config/mosquitto-passwords
 
   mqttServerKey:
     enabled: false
-    mountPath: /mosquitto/config/mqtt-server.key
+    mountPath: /mosquitto/config/mosquitto.key
 
   mqttServerCrt:
     enabled: false
-    mountPath: /mosquitto/config/mqtt-server.crt
+    mountPath: /mosquitto/config/mosquitto.crt
+
+# -- If the CA is not provided from the auth config, a secret named mosquitto-ca-crt is expected
+# containing the CA cert to authenticate clients in the key ca.crt.
+  ca:
+    enabled: false
+    mountPath: /mosquitto/config/ca.crt

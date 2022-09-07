@@ -16,13 +16,13 @@ volumeSpec:
 {{/* Append the password_secret as a volume */}}
 {{- define "mosquitto.passwordSecretVolume" -}}
 enabled: "true"
-mountPath: "/mosquitto/config/password-file.secret"
-subPath: "password-file.secret"
+mountPath: "/mosquitto/config/mosquitto-passwords"
+subPath: "mosquitto-passwords"
 type: "custom"
 volumeSpec:
   secret:
     defaultMode: 0555
-    secretName: {{ template "common.names.fullname" .  }}-password
+    secretName: {{ template "common.names.fullname" .  }}-secrets
 {{- end -}}
 {{- if .Values.persistence.passwordfile.enabled -}}
 {{- $_ := set .Values.persistence "passwordfile" (include "mosquitto.passwordSecretVolume" . | fromYaml) -}}
@@ -31,13 +31,13 @@ volumeSpec:
 {{/* Append the certs files as volumes */}}
 {{- define "mosquitto.certsVolumes.serverCrt" -}}
 enabled: "true"
-mountPath: "/mosquitto/config/mqtt-server.crt"
-subPath: "mqtt-server.crt"
+mountPath: "/mosquitto/config/mosquitto.crt"
+subPath: "mosquitto.crt"
 type: "custom"
 volumeSpec:
   secret:
     defaultMode: 0555
-    secretName: {{ template "common.names.fullname" .  }}-mqtt-server-crt
+    secretName: {{ template "common.names.fullname" .  }}-secrets
 {{- end -}}
 {{- if .Values.persistence.ca.enabled  -}}
 {{- $_ := set .Values.persistence "server-crt" (include "mosquitto.certsVolumes.serverCrt" . | fromYaml) -}}
@@ -59,13 +59,13 @@ volumeSpec:
 
 {{- define "mosquitto.certsVolumes.serverKey" -}}
 enabled: "true"
-mountPath: "/mosquitto/config/mqtt-server.key"
-subPath: "mqtt-server.key"
+mountPath: "/mosquitto/config/mosquitto.key"
+subPath: "mosquitto.key"
 type: "custom"
 volumeSpec:
   secret:
     defaultMode: 0555
-    secretName: {{ template "common.names.fullname" .  }}-mqtt-server-key
+    secretName: {{ template "common.names.fullname" .  }}-secrets
 {{- end -}}
 {{- if .Values.persistence.ca.enabled  -}}
 {{- $_ := set .Values.persistence "server-key" (include "mosquitto.certsVolumes.serverKey" . | fromYaml) -}}
