@@ -1,6 +1,6 @@
 # mosquitto
 
-![Version: 4.9.1](https://img.shields.io/badge/Version-4.9.1-informational?style=flat-square) ![AppVersion: 2.0.14](https://img.shields.io/badge/AppVersion-2.0.14-informational?style=flat-square)
+![Version: 4.9.2](https://img.shields.io/badge/Version-4.9.2-informational?style=flat-square) ![AppVersion: 2.0.14](https://img.shields.io/badge/AppVersion-2.0.14-informational?style=flat-square)
 
 Eclipse Mosquitto - An open source MQTT broker
 
@@ -95,15 +95,15 @@ N/A
 
 ## Changelog
 
-### Version 4.9.1
+### Version 4.9.2
 
 #### Added
 
-* Added support for tls encryption and password file.
+N/A
 
 #### Changed
 
-* Upgraded `common` chart dependency to version 4.5.2
+N/A
 
 #### Fixed
 
