@@ -3,13 +3,13 @@ apiVersion: v2
 appVersion: 1.19.1
 description: Bridges events and allows you to control your Zigbee devices via MQTT
 name: zigbee2mqtt
-version: 9.5.0
+version: 9.5.1
 kubeVersion: ">=1.16.0-0"
 keywords:
   - zigbee
   - mqtt
   - home-assistant
-home: https://github.com/k8s-at-home/charts/tree/master/charts/stable/zigbee2mqtt
+home: https://github.com/grhawk/charts/tree/master/charts/stable/zigbee2mqtt
 icon: https://www.zigbee2mqtt.io/images/logo.png
 sources:
   - https://github.com/Koenkk/zigbee2mqtt
@@ -24,7 +24,5 @@ dependencies:
     version: 4.5.2
 annotations:
   artifacthub.io/changes: |-
-    - kind: added
-      description: Support mutual tls.
     - kind: changed
-      description: Upgraded `common` chart dependency to version 4.5.2
+      description: Improved tls setup.
