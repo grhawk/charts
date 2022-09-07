@@ -40,7 +40,7 @@ volumeSpec:
     secretName: {{ template "common.names.fullname" .  }}-secrets
 {{- end -}}
 {{- if .Values.persistence.ca.enabled  -}}
-{{- $_ := set .Values.persistence "server-crt" (include "mosquitto.certsVolumes.serverCrt" . | fromYaml) -}}
+{{- $_ := set .Values.persistence "crt" (include "mosquitto.certsVolumes.serverCrt" . | fromYaml) -}}
 {{- end -}}
 
 {{- define "mosquitto.certsVolumes.caCrt" -}}
@@ -68,7 +68,7 @@ volumeSpec:
     secretName: {{ template "common.names.fullname" .  }}-secrets
 {{- end -}}
 {{- if .Values.persistence.ca.enabled  -}}
-{{- $_ := set .Values.persistence "server-key" (include "mosquitto.certsVolumes.serverKey" . | fromYaml) -}}
+{{- $_ := set .Values.persistence "key" (include "mosquitto.certsVolumes.serverKey" . | fromYaml) -}}
 {{- end -}}
 
 {{/* Render the templates */}}

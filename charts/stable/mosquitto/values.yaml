@@ -29,6 +29,10 @@ auth:
   # -- By enabling this, `allow_anonymous` gets set to `false` in the mosquitto config.
   enabled: false
 
+  # -- Allows only client presenting a valid certificate.
+  require_certificate: false
+
+
   # -- The following config allow to create secrets to provide the passwordfile or
   # the certs needed for TLS encryption. Remember to enable the needed persistence
   # to make this setting working.
@@ -74,11 +78,11 @@ persistence:
     enabled: false
     mountPath: /mosquitto/config/mosquitto-passwords
 
-  mqttServerKey:
+  key:
     enabled: false
     mountPath: /mosquitto/config/mosquitto.key
 
-  mqttServerCrt:
+  crt:
     enabled: false
     mountPath: /mosquitto/config/mosquitto.crt
 
